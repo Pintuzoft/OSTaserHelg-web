@@ -30,7 +30,7 @@ echo "    <link rel='stylesheet' type='text/css' href='https://cdn.datatables.ne
 
 echo "  </head>\n";
 
-echo "  <body style='background-color:#282828; color:#EFEFEF'>\n";
+echo "  <body style=\"background-image:url('images/counterstrike_taser_midjourney_gradient.jpg');background-repeat: no-repeat; background-color:#282828; color:#EFEFEF\">\n";
 
   
 /* HEADER */
