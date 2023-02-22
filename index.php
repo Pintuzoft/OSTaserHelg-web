@@ -66,9 +66,9 @@ echo "          </div>\n";
 
 echo "          <div id='content-middle' class='col col-6'>\n";
 echo "            <h4 style='color:#fbb204'>Senaste händelserna</h4>\n";
-echo "             <table id='eventlist' class='table table-dark table-striped table-bordered'>\n";
+echo "             <table id='eventlist' class='table table-bordered' style='background-color: #FAFAFA;'>\n";
 
-echo "              <thead>\n";
+echo "              <thead class='table-dark'>\n";
 echo "                <tr>\n";
 echo "                  <th class='col-3'>Time</th>\n";
 echo "                  <th class='col-4'>Attacker</th>\n";
@@ -80,10 +80,20 @@ echo "              <tbody>\n";
 
 $eList = getEventList ( );
 foreach ( $eList->getArray() as $event ) {
-    echo "                <tr>\n";
+    $isTeamKill = ( $event->getType() == 1 );
+    $rowClass = "";
+    if ( $isTeamKill ) {
+        $rowClass = "class='table-danger'";
+    }
+    echo "                <tr ".$rowClass.">\n";
     echo "                  <td class='col-3'>".$event->getStamp()."</td>\n";
-    echo "                  <td class='col-4'>".$event->getAttacker()." [+".$event->getPoints()."p]</td>\n";
-    echo "                  <td class='col-4'>".$event->getVictim()." [-".$event->getPoints()."p]</td>\n";
+    if ( $isTeamKill ) {
+        echo "                  <td class='col-4'>".$event->getAttacker()." [-".$event->getPoints()."p]</td>\n";
+        echo "                  <td class='col-4'>".$event->getVictim()." [+".$event->getPoints()."p]</td>\n";    
+    } else {
+        echo "                  <td class='col-4'>".$event->getAttacker()." [+".$event->getPoints()."p]</td>\n";
+        echo "                  <td class='col-4'>".$event->getVictim()."</td>\n";    
+    }
     echo "                </tr>\n";
 }
 
@@ -94,9 +104,9 @@ echo "          </div>\n";
 /* CONTENT RIGHT */
 echo "          <div id='content-right' class='col col-3'>\n";
 echo "            <h4 style='color:#fbb204'>Topplista</h4>\n";
-echo "            <table id='userlist' class='table table-dark table-striped table-bordered'>\n";
+echo "            <table id='userlist' class='table table-bordered' style='background-color: #FAFAFA;'>\n";
 
-echo "              <thead>\n";
+echo "              <thead class='table-dark'>\n";
 echo "                <tr>\n";
 echo "                  <th class='col-1'>Rank</th>\n";
 echo "                  <th class='col-4'>Name</th>\n";
